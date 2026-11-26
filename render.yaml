@@ -1,0 +1,15 @@
+# Optional Render Blueprint. You can also create the Web Service by hand with the same values.
+services:
+  - type: web
+    name: gwa-tracker
+    runtime: node
+    plan: free
+    buildCommand: npm ci --include=dev && npm run build
+    startCommand: npm start
+    healthCheckPath: /api/health
+    autoDeploy: true
+    envVars:
+      - key: DATABASE_URL
+        sync: false   # paste the Supabase Session pooler string in the Render dashboard
+      - key: NODE_ENV
+        value: production
